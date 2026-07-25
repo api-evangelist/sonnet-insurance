@@ -37,6 +37,14 @@ Sonnet genuinely does all four online, and is notable in the Canadian market for
 
 The only third-party integrations Sonnet describes are commercial, not technical: the Kanetix.ca (RATESDOTCA) quote-and-buy partnership and the Sonnet Connect brand referral program, neither of which publishes any integration detail.
 
+### Two machine-readable surfaces that do exist
+
+**An `llms.txt`, but no API.** `https://www.sonnet.ca/llms.txt` returns a real 5,836-byte document declaring per-agent AI directives — `AI-Training`, `AI-Generation`, `AI-Summarization` and `AI-Crawling` all set to `Allow`, with named entries for OpenAI, Google-DeepMind and Anthropic — plus a curated index of Sonnet's product, support, legal and social pages and a "Sitemap for AI Indexing (Not Training)" pointer. A carrier with no developer program has nonetheless published a deliberate agent-facing consent posture. The AI surface arrived before the API surface. Captured verbatim in `llms/`.
+
+**An undocumented internal API.** DNS enumeration surfaced `secure.sonnet.ca` — the only resolving non-`www` subdomain and the host of Sonnet's AngularJS quote-and-buy application. Its public application bundle contains **117 distinct `/api/v1/*` endpoint paths** spanning quoting (30), identity and verification (21), payments and billing (14), underwriting data (11), policy servicing (10), binding and issuance (7), address and availability (7), customer profile (7), group discounts (4), content and support (4), claims (1) and telemetry (1). `/api/v1/digital_quotes/create_auto`, `/api/v1/bind_policy` and `/api/v1/generate_document/` mean quote, bind and issue are each backed by real JSON endpoints. No FNOL endpoint was observed.
+
+This does not make Sonnet an API provider. There is no documentation, no specification, no developer terms and no credential a third party can obtain. Nothing was called and nothing was inferred: the inventory in `endpoints/` records observed paths only, `apis[]` stays empty, and no OpenAPI was fabricated.
+
 ### Market context
 
 Canada has the most fragmented insurance supervision of the major markets — OSFI supervises federally-regulated insurers prudentially while the provinces regulate market conduct (FSRA in Ontario, AMF in Quebec). There is no open-insurance mandate, and Consumer-Driven Banking, Canada's open-banking framework, excludes insurance entirely. Nothing compels Sonnet to expose an API, and it does not.

@@ -19,6 +19,15 @@ description: Sonnet Insurance is a Canadian direct-to-consumer digital property 
   The only third-party integrations Sonnet describes -- the Kanetix.ca (RATESDOTCA)
   quote-and-buy partnership and the Sonnet Connect brand referral program -- are
   privately negotiated commercial arrangements with no public technical documentation.
+  Two machine-readable surfaces do exist and are captured here. Sonnet serves a real
+  llms.txt at www.sonnet.ca/llms.txt that declares per-agent AI-Training, AI-Generation,
+  AI-Summarization and AI-Crawling directives (Allow for OpenAI, Google-DeepMind and
+  Anthropic) alongside a curated reference-content index -- an AI consent signal rather
+  than an API contract. And the secure.sonnet.ca quote-and-buy application is driven by an
+  undocumented first-party REST/JSON surface under /api/v1 covering quoting, binding,
+  policy servicing, payments and identity; it is observable from Sonnet's own public
+  JavaScript bundle but carries no documentation, no specification and no third-party
+  terms of use, so it is recorded as observed evidence, not as an integratable API.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
@@ -35,6 +44,8 @@ modified: '2026-07-25'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/sonnet-insurance-domain-security.yml
 - type: Website
   url: https://www.sonnet.ca/
 - type: About
@@ -49,6 +60,46 @@ common:
   url: https://www.linkedin.com/company/sonnet-insurance
 - type: Twitter
   url: https://x.com/sonnetinsurance
+- type: Facebook
+  url: https://www.facebook.com/sonnetinsurance/
+- type: Instagram
+  url: https://www.instagram.com/sonnetinsurance
+- type: YouTube
+  url: https://www.youtube.com/channel/UCEOXIbT5710DW8JhHfD_qhw
+- type: TikTok
+  url: https://www.tiktok.com/@sonnetinsurance
+- type: Support
+  url: https://www.sonnet.ca/contact-us
+- type: FAQ
+  url: https://www.sonnet.ca/faqs
+- type: SignUp
+  url: https://www.sonnet.ca/get-a-quote
+- type: TermsOfService
+  url: https://www.sonnet.ca/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.sonnet.ca/privacy
+- type: Accessibility
+  url: https://www.sonnet.ca/accessibility
+- type: News
+  url: https://www.sonnet.ca/news
+- type: Careers
+  url: https://www.sonnet.ca/join-us
+- type: Newsletter
+  url: https://www.sonnet.ca/newsletter
+- type: Sitemap
+  url: https://www.sonnet.ca/sitemap.xml
+- type: LLMsTxt
+  name: llms.txt published by Sonnet Insurance
+  url: llms/sonnet-insurance-llms.txt
+- type: ContentSignal
+  name: AI usage directives declared in Sonnet's llms.txt
+  url: llms/sonnet-insurance-llms.txt
+- type: EndpointInventory
+  name: Observed undocumented first-party endpoints (not a published API)
+  url: endpoints/sonnet-insurance-observed-endpoints.yml
+- type: WellKnownProbe
+  name: /.well-known/ probe record - nothing served
+  url: well-known/sonnet-insurance-well-known.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

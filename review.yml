@@ -173,6 +173,41 @@ findings:
     status: 404
     note: No GitHub organization found for sonnet, sonnetinsurance,
       sonnet-insurance, SonnetInsurance, definity or definity-financial.
+  - url: https://www.sonnet.ca/llms.txt
+    status: 200
+    note: >-
+      Round 2. A REAL llms.txt (text/plain, 5,836 bytes) -- missed in round 1. Declares
+      per-agent AI-Training/Generation/Summarization/Crawling directives (Allow for
+      OpenAI, Google-DeepMind, Anthropic) plus a curated reference-content link index.
+      Saved verbatim to llms/sonnet-insurance-llms.txt.
+  - url: https://secure.sonnet.ca
+    status: 200
+    note: >-
+      Round 2. New host found by DNS enumeration -- the only resolving non-www subdomain.
+      Serves the AngularJS quote-and-buy application (ng-app "receiveQuote"). Round 1
+      concluded there was "no separately addressable public API host"; secure.sonnet.ca
+      is separately addressable, though it publishes no documentation.
+  - url: https://secure.sonnet.ca/openapi.json
+    status: 200
+    note: >-
+      SOFT 404. Returns a 42,753-byte text/html error shell, byte-identical in length to
+      the www.sonnet.ca 404 body. Every unknown path on this host answers 200 with the
+      same shell -- /swagger.json, /api-docs, /docs, /redoc, /graphql, /v1/openapi.json
+      and all /.well-known/* probes included. No specification is served.
+  - url: https://secure.sonnet.ca/robots.txt
+    status: 200
+    note: 'Disallow: / with Allow: /login. No API or docs paths.'
+  - url: https://secure.sonnet.ca/assets/application-1419d57525ffb29a820cadd9da8c1fc465fe24b68aeb4e8fb30882f518dfe63a.js
+    status: 200
+    note: >-
+      Round 2. The 6.3 MB application bundle. Contains 117 distinct first-party
+      /api/v1/* endpoint paths covering quote, bind, issue, policy servicing, payments,
+      underwriting data, address validation and identity/verification. Zero matches for
+      swagger or openapi in the bundle. Inventoried at
+      endpoints/sonnet-insurance-observed-endpoints.yml.
+  - url: https://status.sonnet.ca
+    status: 0
+    note: DNS does not resolve. No status page; also no trust. or security. subdomain.
   acordPosture: no ACORD reference found
   acordEvidence: |
     Zero matches for ACORD, AL3, ACORD XML, NGDS, IVANS, Applied Epic,
@@ -280,6 +315,86 @@ sources:
 - url: https://www.sonnet.ca/robots.txt
   type: Robots
   note: No developer or API paths referenced.
+enrichment:
+  round: 2
+  date: '2026-07-25'
+  summary: |
+    Round 2 ran full contract discovery against every host, not just www. Two findings
+    revise round 1 without overturning its verdict -- Sonnet still publishes no API.
+
+    1. An llms.txt exists. www.sonnet.ca/llms.txt returns a real 5,836-byte text/plain
+    document that round 1 never probed. It is an AI-consent and content-indexing file,
+    not an API artifact: per-agent AI-Training / AI-Generation / AI-Summarization /
+    AI-Crawling directives (blanket Allow, with named Allow entries for OpenAI,
+    Google-DeepMind and Anthropic), a curated link index of Sonnet's product, support,
+    legal and social pages, and a "Sitemap for AI Indexing (Not Training)" pointer. This
+    is a deliberate, machine-readable agent-facing posture from a company with no
+    developer program -- a notable pattern: the AI surface arrived before the API surface.
+
+    2. An undocumented first-party API surface exists. DNS enumeration found
+    secure.sonnet.ca, the only resolving non-www subdomain and the host of the AngularJS
+    quote-and-buy application. Its public application bundle contains 117 distinct
+    /api/v1/* endpoint paths: quoting (30), identity and verification (21),
+    payments and billing (14), underwriting data (11), policy servicing (10),
+    binding and issuance (7), address and availability (7), customer profile (7),
+    group discounts (4), content and support (4), claims (1), telemetry (1).
+    Named endpoints include /api/v1/digital_quotes/create_auto,
+    /api/v1/digital_quotes/create_property, /api/v1/bind_policy, /api/v1/bind_policies
+    and /api/v1/generate_document/ -- so quote, bind and issue are all backed by real
+    JSON endpoints. No FNOL/claim-submission endpoint was observed;
+    /api/v1/retrieve_claims_data is read-only.
+
+    This does NOT make Sonnet an API provider. There is no documentation, no
+    specification, no developer terms, no credential a third party can obtain and no
+    stated support for external use. HTTP methods were resolved for only 29 of the 117
+    paths (the rest are held in constants and invoked indirectly), and no request bodies,
+    response schemas, parameters or example values were inferred. No endpoint was called.
+    apis[] therefore remains empty, no OpenAPI was fabricated, and no OpenAPI pointer was
+    wired -- the inventory is filed under a descriptive EndpointInventory type so the
+    evidence is preserved without misrepresenting a private surface as a public contract.
+
+    Everything else re-probed negative: no /.well-known/ document on any host, no GitHub
+    organization (seven candidate names), no npm or PyPI package, no status, trust or
+    security subdomain, no bug bounty or disclosure page, no trust center, no Postman
+    workspace, no SDK, no CLI, no changelog, no webhook or AsyncAPI surface. Domain
+    security was probed live: TLS 1.3, HSTS present but with a weak 3600-second max-age,
+    no DNSSEC, no CAA records, SPF present, DMARC present at p=none (monitor only).
+  revises_round_1:
+  - claim: '"no separately addressable public API host"'
+    correction: >-
+      secure.sonnet.ca is separately addressable and serves /api/v1/*. It is
+      undocumented, not absent.
+  - claim: '"exposes no bind API"'
+    correction: >-
+      Accurate as written -- no bind API is exposed to third parties -- but
+      /api/v1/bind_policy and /api/v1/bind_policies exist as internal endpoints.
+  - claim: llms.txt was not probed in round 1
+    correction: It exists and returns 200 with real content.
+  artifacts:
+  - file: llms/sonnet-insurance-llms.txt
+    method: searched
+    note: Verbatim capture of https://www.sonnet.ca/llms.txt.
+  - file: endpoints/sonnet-insurance-observed-endpoints.yml
+    method: derived
+    note: 117 observed paths from the public application bundle. Not an API contract.
+  - file: well-known/sonnet-insurance-well-known.yml
+    method: searched
+    note: Negative result recorded, including the secure.sonnet.ca soft-404 trap.
+  - file: security/sonnet-insurance-domain-security.yml
+    method: probed
+    note: Live TLS/HSTS/DNSSEC/CAA/SPF/DMARC probe.
+  negative_results:
+    well_known: none served on www.sonnet.ca, secure.sonnet.ca or sonnet.ca
+    github_org: none for sonnet, sonnetinsurance, sonnet-insurance, SonnetInsurance,
+      definity, definity-financial, DefinityFinancial
+    packages: no npm or PyPI package
+    status_page: status.sonnet.ca does not resolve
+    trust_center: trust.sonnet.ca and security.sonnet.ca do not resolve; probe found none
+    vulnerability_disclosure: no security.txt, no bug bounty, no disclosure page
+    postman: none
+    graphql: none -- secure.sonnet.ca/graphql is the soft-404 shell
+    asyncapi_webhooks: none
+    mcp: none
 actions:
   apisYmlUpdated: true
   apisListed: 0

@@ -1,0 +1,462 @@
+generated: '2026-07-25'
+method: derived
+source: https://secure.sonnet.ca/assets/application-1419d57525ffb29a820cadd9da8c1fc465fe24b68aeb4e8fb30882f518dfe63a.js
+status: undocumented-internal
+disclaimer: This is NOT a published Sonnet Insurance API and it is NOT an OpenAPI definition. Sonnet publishes
+  no developer portal, no documentation, no machine-readable specification and no terms permitting third-party
+  use. These paths were read verbatim out of the provider's own publicly served JavaScript bundle for
+  the secure.sonnet.ca quote-and-buy application. They are recorded here as observed evidence that the
+  quote / bind / issue / servicing capability exists behind a first-party JSON surface. No request bodies,
+  response schemas, parameters, authentication credentials or example values were inferred, invented or
+  captured, and no endpoint was called. Do not treat this inventory as an integration contract.
+host: https://secure.sonnet.ca
+base_path: /api/v1
+versioning: uri-path (v1)
+transport: REST/JSON over HTTPS
+client: AngularJS single-page application (ng-app "receiveQuote") served from secure.sonnet.ca
+authentication:
+  model: first-party browser session (consumer policyholder login); not a public developer credential
+  observed_signals:
+  - /api/v1/session/validate
+  - /api/v1/users/get_primary_token
+  - /api/v1/users/is_login_required
+  - /api/v1/recaptcha/validate_recaptcha_score
+  note: No OAuth2, OIDC, API-key or mTLS scheme is published. /.well-known/openid-configuration and /.well-known/oauth-authorization-server
+    are not served.
+  documented_by_provider: false
+coverage:
+  endpoints_observed: 117
+  methods_resolved: 29
+  methods_unresolved: 88
+  groups: 12
+insurance_verbs_backed:
+  quote:
+  - /api/v1/digital_quotes/create_auto
+  - /api/v1/digital_quotes/create_property
+  - /api/v1/quote
+  bind:
+  - /api/v1/bind_policy
+  - /api/v1/bind_policies
+  issue:
+  - /api/v1/generate_document/
+  - /api/v1/list_of_policies
+  fnol: []
+  fnol_note: No first notice of loss endpoint was observed. /api/v1/retrieve_claims_data is read-only
+    claims retrieval, not claim submission.
+groups:
+- group: quoting
+  endpoint_count: 30
+  endpoints:
+  - path: /api/v1/account_quoting
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/auto/quotes/create_with_manual
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/auto/quotes/update
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/carts/check_cart_staleness
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/carts/clear_cart
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/carts/email_link
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/carts/get_cart
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/carts/overwrite
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/carts/requote_and_save_cart
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/carts/save_cart
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/check_product_availability_for_auto
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/check_product_availability_for_property
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/create_auto
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/create_auto_with_manual
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/create_property
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/get_additional_drivers
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/merge
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/requote
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/requote_fcsa
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/digital_quotes/retrieve_quick_quote
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/digital_quotes/save
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/digital_quotes/save_no_product_lead
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/quote
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/quote_policy_cancellation
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/save_and_continue_quote/overwrite_prospect_user
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/save_and_continue_quote/retrieve_quote_by_email
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/save_and_continue_quote/retrieve_quote_by_token
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/save_and_continue_quote/save_prospect_user
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/save_and_continue_quote/validate_prospect_user
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/save_quote
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: binding-and-issuance
+  endpoint_count: 7
+  endpoints:
+  - path: /api/v1/add_named_insured_and_interests_for_auto
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/add_named_insured_and_interests_for_property
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/bind_policies
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/bind_policy
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/confirm_info
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/confirm_instructions
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/generate_document/
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: policy-servicing
+  endpoint_count: 10
+  endpoints:
+  - path: /api/v1/auto/policies/
+    methods:
+    - PUT
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/cancellation_consents
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/cancellation_consents/check
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/home_owners/policies/
+    methods:
+    - PUT
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/initiate_policy_cancellation
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/list_of_policies
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/policy_change_confirm_info
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/retrieve_notifications
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/save_user_response_cancellation
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/set_notification_viewed
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: claims
+  endpoint_count: 1
+  endpoints:
+  - path: /api/v1/retrieve_claims_data
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: payments-and-billing
+  endpoint_count: 14
+  endpoints:
+  - path: /api/v1/all_payment_plans
+    methods:
+    - GET
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/delinquent_status
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/payments/create_billing_agreement
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/payments/eft_validate
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/payments/get_express_checkout_details
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/payments/lookup_masked
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/payments/set_express_checkout
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/paypal_caches/load_state
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/paypal_caches/save_state
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/plan_details
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/retrieve_billing_info
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/update_billing_date
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/update_payment_info
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/update_payment_plan
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: underwriting-data
+  endpoint_count: 11
+  endpoints:
+  - path: /api/v1/auto/licence_classes
+    methods:
+    - GET
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/auto/vdm/validate_vin
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/auto/vehicles/autocomplete
+    methods:
+    - GET
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/driver_registrations/get_existing_emails
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/driver_registrations/policies_summary
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/driver_registrations/resend_email
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/driver_registrations/update_email
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/driver_registrations/validate
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/get_convictions_suspensions
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/suggest_institution_name
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/suggest_leasing_name
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: address-and-availability
+  endpoint_count: 7
+  endpoints:
+  - path: /api/v1/address_assert_recognize
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/address_assert_recognize_unparsed
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/address_assert_suggest
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/address_parse
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/address_recognize
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/address_suggest
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/get_product_availability_by_postal_code
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: identity-and-verification
+  endpoint_count: 21
+  endpoints:
+  - path: /api/v1/recaptcha
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/recaptcha/validate_recaptcha_score
+    methods:
+    - POST
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/reset_password
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/session/validate
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/users/get_email_from_confirmation_token
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/users/get_primary_token
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/users/is_login_required
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/users/modify_email_for_new_business
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/users/update_email
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/users/update_password
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/users/validate_emails
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/validate_email_availability
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/resend_security_key_for_driver_register
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/resend_security_key_for_register
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/resend_security_key_for_update
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/validate_security_key_for_driver_register
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/validate_security_key_for_register
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/validate_security_key_for_update
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/verify_phone_for_driver_register
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/verify_phone_for_register
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/verification/verify_phone_for_update
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: customer-profile
+  endpoint_count: 7
+  endpoints:
+  - path: /api/v1/case
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/consents/
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/create_unsecure_case
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/pref_culture
+    methods:
+    - GET
+    method_evidence: derived from the adjacent $http verb call in the application bundle
+  - path: /api/v1/retrieve_contact_data
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/retrieve_pre_populate_data
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/update_contact_data
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: group-discounts
+  endpoint_count: 4
+  endpoints:
+  - path: /api/v1/group_discounts
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/group_discounts/
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/group_discounts/consolidated_group_discount
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/subgroups
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: content-and-support
+  endpoint_count: 4
+  endpoints:
+  - path: /api/v1/documents/navigation_search
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/documents/quick_search/
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/faq/fetch_faqs
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+  - path: /api/v1/faq/fetch_inbound_support_panel_contact_data
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)
+- group: telemetry
+  endpoint_count: 1
+  endpoints:
+  - path: /api/log
+    methods: null
+    method_evidence: not resolvable from the bundle (path held in a constant and invoked indirectly)

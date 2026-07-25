@@ -1,0 +1,51 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of https://www.sonnet.ca and https://secure.sonnet.ca
+result: none-found
+note: >-
+  Sonnet Insurance serves no /.well-known/ discovery documents on either host. No raw files were
+  saved because nothing returned a real document, and no WellKnown pointer is wired into apis.yml
+  because there is no catalog to point at. IMPORTANT for future rounds: secure.sonnet.ca answers
+  HTTP 200 for every unknown path with a 42,753-byte HTML error shell (identical byte length to the
+  www.sonnet.ca 404 body). A 200 status from that host is NOT evidence of a document -- confirm
+  content-type and body before trusting any hit there.
+hosts:
+- host: https://www.sonnet.ca
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://secure.sonnet.ca
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    verdict: soft-404
+    note: text/html error shell, 42753 bytes -- not a security.txt.
+  - path: /.well-known/openid-configuration
+    status: 200
+    verdict: soft-404
+    note: text/html error shell, 42753 bytes -- not OIDC discovery metadata.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    verdict: soft-404
+    note: text/html error shell, 42753 bytes -- not RFC 8414 metadata.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    verdict: soft-404
+    note: text/html error shell, 42753 bytes.
+  - path: /.well-known/api-catalog
+    status: 200
+    verdict: soft-404
+    note: text/html error shell, 42753 bytes.
+- host: https://sonnet.ca
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+security_txt: null
