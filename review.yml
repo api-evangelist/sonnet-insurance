@@ -1,0 +1,292 @@
+aid: sonnet-insurance
+name: Sonnet Insurance
+review:
+  question: Does Sonnet Insurance publish a public, self-serve developer portal or
+    any documented API for quote, bind, issue, or FNOL?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: Canada
+  tier: insurtech-dtc
+  gated: true
+findings:
+  summary: |
+    Sonnet Insurance publishes no public API surface of any kind. Sonnet is a
+    Canadian direct-to-consumer property and casualty insurer (a Definity
+    Financial company, launched 2016) that underwrites its own auto, home,
+    condo, tenant, landlord and pet policies and sells them exclusively
+    through sonnet.ca.
+
+    No first-party developer surface exists. Every candidate developer
+    subdomain -- developer.sonnet.ca, developers.sonnet.ca, docs.sonnet.ca,
+    api.sonnet.ca -- fails to resolve in DNS (no A record, connection never
+    established). Every candidate first-party path -- /developers, /developer,
+    /api, /partners, /integrations -- returns HTTP 404 from www.sonnet.ca.
+    There is no login wall to classify and no marketing "innovation" developer
+    page: the surface is simply absent.
+
+    No downloadable machine-readable specification was found. /openapi.json,
+    /swagger.json, /api-docs, /graphql and /api/v1 all return HTTP 404. The
+    homepage, the get-a-quote flow and the account login page were fetched and
+    inspected: the markup contains no reference to swagger, openapi, graphql,
+    or any api./auth./identity host. The consumer quote-and-buy flow is a
+    first-party application served from www.sonnet.ca (fronted by Imperva
+    Incapsula) with no separately addressable public API host. Zero specs were
+    harvested; the openapi/ directory is intentionally omitted.
+
+    ACORD posture: no ACORD reference found. Searches of the site markup for
+    ACORD, AL3, ACORD XML, NGDS, IVANS, Applied Epic, Vertafore and AMS360
+    returned zero matches. This is structurally consistent rather than an
+    oversight -- Sonnet has no broker or agency channel at all, so the ACORD
+    agency-download rails that carry integration for broker-distributed
+    Canadian carriers have nothing to attach to here. Sonnet's own FAQ states:
+    "A third party - even a licensed broker - cannot purchase a Sonnet policy
+    on your behalf" and "Sonnet is a direct writer - this means our insurance
+    can only be purchased from sonnet.ca and it's not available for brokers,
+    dealerships (or anybody else) to sell to you."
+
+    Quote / bind / issue / FNOL: Sonnet genuinely performs all four -- quote,
+    bind, issue and first notice of loss are all available online to
+    consumers -- but exclusively through its own web application. None of the
+    four is exposed as a documented API to any audience: not consumer, not
+    agent, not partner.
+
+    The only third-party integrations Sonnet describes are commercial rather
+    than technical. Sonnet was announced as the first Kanetix.ca (now
+    RATESDOTCA) partner letting comparison-site users not just quote but buy
+    home and auto insurance online; the announcement contains no API, data
+    feed, ACORD or real-time quoting detail. Sonnet Connect (launched April
+    2019) aggregates roughly fourteen partner brands -- Homewise, Petsecure,
+    Car Loans Canada, Borrowell, KOHO, Mylo, Wealthsimple among them -- and is
+    a referral and offer-aggregation program with no described technical
+    integration. The /partnerships page is a group and affinity insurance
+    landing page for employers and associations with no developer content.
+
+    Market context: this posture is the Canadian norm rather than an outlier.
+    OSFI supervises federally-regulated insurers prudentially while the
+    provinces regulate market conduct (FSRA in Ontario, AMF in Quebec -- Sonnet
+    links the AMF register of authorized firms in its Quebec footer). There is
+    no open-insurance mandate in Canada, and Consumer-Driven Banking, Canada's
+    open-banking framework, excludes insurance entirely. Nothing compels
+    Sonnet to expose an API, and it does not.
+  portal:
+    url: ''
+    confirmed: false
+    classification: none
+    note: No developer portal exists in any form. Not a login wall, not a
+      marketing page -- the DNS records and paths do not exist.
+  probes:
+  - url: https://sonnet.ca
+    status: 200
+    note: Redirects to https://www.sonnet.ca/ -- corporate and consumer site.
+  - url: https://www.sonnet.ca
+    status: 200
+  - url: https://developer.sonnet.ca
+    status: 0
+    note: DNS does not resolve (no A record).
+  - url: https://developers.sonnet.ca
+    status: 0
+    note: DNS does not resolve (no A record).
+  - url: https://docs.sonnet.ca
+    status: 0
+    note: DNS does not resolve (no A record).
+  - url: https://api.sonnet.ca
+    status: 0
+    note: DNS does not resolve (no A record).
+  - url: https://app.sonnet.ca
+    status: 0
+    note: DNS does not resolve.
+  - url: https://portal.sonnet.ca
+    status: 0
+    note: DNS does not resolve.
+  - url: https://partners.sonnet.ca
+    status: 0
+    note: DNS does not resolve.
+  - url: https://broker.sonnet.ca
+    status: 0
+    note: DNS does not resolve.
+  - url: https://auth.sonnet.ca
+    status: 0
+    note: DNS does not resolve.
+  - url: https://www.sonnet.ca/developers
+    status: 404
+  - url: https://www.sonnet.ca/developer
+    status: 404
+  - url: https://www.sonnet.ca/api
+    status: 404
+  - url: https://www.sonnet.ca/partners
+    status: 404
+  - url: https://www.sonnet.ca/integrations
+    status: 404
+  - url: https://www.sonnet.ca/openapi.json
+    status: 404
+  - url: https://www.sonnet.ca/swagger.json
+    status: 404
+  - url: https://www.sonnet.ca/api-docs
+    status: 404
+  - url: https://www.sonnet.ca/api/v1
+    status: 404
+  - url: https://www.sonnet.ca/graphql
+    status: 404
+  - url: https://www.sonnet.ca/.well-known/openid-configuration
+    status: 404
+  - url: https://www.sonnet.ca/.well-known/oauth-authorization-server
+    status: 404
+  - url: https://www.sonnet.ca/.well-known/security.txt
+    status: 404
+  - url: https://www.sonnet.ca/robots.txt
+    status: 200
+    note: Disallow list is entirely policy-conditions and consent documents; no
+      api or developer paths referenced.
+  - url: https://www.sonnet.ca/sitemap.xml
+    status: 200
+    note: Full sitemap enumerated -- no /api, /developer, /developers, /docs or
+      /integrations entry exists. Only marketing, blog, FAQ and product pages.
+  - url: https://www.sonnet.ca/about-us
+    status: 200
+    note: Identity, ownership (Definity), lines of business and provincial
+      footprint confirmed here.
+  - url: https://www.sonnet.ca/partnerships
+    status: 200
+    note: Group and affinity insurance landing page. No API, developer program,
+      data feed or partner technical onboarding language.
+  - url: https://www.sonnet.ca/get-a-quote
+    status: 200
+    note: Consumer quote entry point. First-party application, no public API
+      host referenced in markup.
+  - url: https://www.sonnet.ca/account-log-in
+    status: 200
+    note: Consumer policyholder login. No identity-provider host (Okta, Auth0,
+      B2C) exposed in markup; no partner or broker login.
+  - url: https://www.sonnet.ca/faqs/other-inquiries/can-i-buy-sonnet-insurance-through-a-broker
+    status: 200
+    note: Confirms direct-writer-only distribution; no broker channel.
+  - url: https://www.sonnet.ca/news/sonnet-insurance-first-kanetixca-partner-with-the-ability-for-customers-to-buy-insurance-online
+    status: 200
+    note: Kanetix.ca quote-and-buy partnership announcement -- no technical
+      integration detail disclosed.
+  - url: https://www.sonnet.ca/news/sonnet-insurance-partners-with-like-minded-brands-to-simplify-life-for-canadians-through-sonnet-connect
+    status: 200
+    note: Sonnet Connect referral program -- no API or embedded-insurance
+      integration described.
+  - url: https://api.github.com/orgs/sonnet
+    status: 404
+    note: No GitHub organization found for sonnet, sonnetinsurance,
+      sonnet-insurance, SonnetInsurance, definity or definity-financial.
+  acordPosture: no ACORD reference found
+  acordEvidence: |
+    Zero matches for ACORD, AL3, ACORD XML, NGDS, IVANS, Applied Epic,
+    Vertafore or AMS360 across the fetched homepage, get-a-quote page and
+    account login page markup, and no such page appears anywhere in the
+    published sitemap. Sonnet has no broker or agency distribution channel, so
+    no ACORD agency-download or ACORD XML transport applies to it by design.
+  insuranceVerbs:
+    quote:
+      exposedAsAPI: false
+      audience: consumer
+      note: Performed online at www.sonnet.ca/get-a-quote through Sonnet's own
+        web application only.
+    bind:
+      exposedAsAPI: false
+      audience: consumer
+      note: Sonnet is notable for allowing full online purchase, including
+        through Kanetix.ca, but exposes no bind API.
+    issue:
+      exposedAsAPI: false
+      audience: consumer
+      note: Policy documents are issued through the online account; no API.
+    fnol:
+      exposedAsAPI: false
+      audience: consumer
+      note: Claims are reported online or by phone; no FNOL API, no ACORD claim
+        message, no partner claims feed.
+  transports:
+  - protocol: REST
+    scheme: https
+    documented: false
+    note: No public REST API is documented. No api.sonnet.ca host exists.
+  - protocol: GraphQL
+    scheme: https
+    documented: false
+    note: https://www.sonnet.ca/graphql returns HTTP 404. No GraphQL surface
+      found; nothing to introspect.
+  - protocol: gRPC
+    documented: false
+    note: No .proto files published.
+  - protocol: SOAP
+    documented: false
+    note: No SOAP or ACORD XML web-service endpoint published.
+  - protocol: EDI
+    documented: false
+    note: No AL3 or IVANS agency-download transport -- Sonnet has no broker
+      channel for one to serve.
+  - protocol: WebSocket
+    scheme: wss
+    documented: false
+  authModel:
+    scheme: none-public
+    note: No public API authentication scheme is documented -- there is no
+      public API. The only authenticated surface is consumer policyholder
+      login at /account-log-in (username and password web session). No OAuth2,
+      no API keys, no mTLS, no partner SAML federation is published.
+      /.well-known/openid-configuration and
+      /.well-known/oauth-authorization-server both return HTTP 404.
+  webhooks:
+    published: false
+    asyncapi: false
+    note: No event catalog, webhook documentation or AsyncAPI document exists.
+  postman:
+    published: false
+    note: No public Postman collection or workspace found.
+  sdks:
+    published: false
+    note: No SDKs, no CLI, no GitHub organization.
+  specs:
+    harvested: 0
+    note: No OpenAPI, Swagger, AsyncAPI, GraphQL SDL or .proto artifact was
+      found, so the openapi/ directory is omitted entirely. Nothing was
+      fabricated.
+  regulatory:
+    prudential: OSFI (federal)
+    marketConduct: Provincial -- FSRA (Ontario), AMF (Quebec); Sonnet links the
+      AMF register of authorized firms from its Quebec-facing pages.
+    openInsuranceMandate: none
+    note: Canada has no open-insurance mandate, and Consumer-Driven Banking
+      excludes insurance entirely. There is no forcing function requiring
+      Sonnet to expose an API.
+sources:
+- url: https://www.sonnet.ca/about-us
+  type: About
+  note: '"Canada''s original digital-first home and auto insurance company, and a
+    proud member of the Definity family of companies"; lines of business and
+    provincial footprint.'
+- url: https://www.sonnet.ca/faqs/other-inquiries/can-i-buy-sonnet-insurance-through-a-broker
+  type: FAQ
+  note: 'Direct-writer-only distribution: "Sonnet is a direct writer - this means
+    our insurance can only be purchased from sonnet.ca".'
+- url: https://www.sonnet.ca/partnerships
+  type: Partnerships
+  note: Group and affinity program page; no developer or API content.
+- url: https://www.sonnet.ca/news/sonnet-insurance-partners-with-like-minded-brands-to-simplify-life-for-canadians-through-sonnet-connect
+  type: News
+  note: Sonnet Connect partner referral program, April 2019; no technical
+    integration described.
+- url: https://www.sonnet.ca/news/sonnet-insurance-first-kanetixca-partner-with-the-ability-for-customers-to-buy-insurance-online
+  type: News
+  note: Kanetix.ca quote-and-buy partnership; no API or ACORD detail.
+- url: https://www.sonnet.ca/sitemap.xml
+  type: Sitemap
+  note: Enumerated in full; contains no developer, docs or API path.
+- url: https://www.sonnet.ca/robots.txt
+  type: Robots
+  note: No developer or API paths referenced.
+actions:
+  apisYmlUpdated: true
+  apisListed: 0
+  openapiDirectoryCreated: false
+  reason: |
+    Sonnet Insurance exposes no public, documented API. apis[] is therefore
+    empty and the openapi/ directory is omitted. Recording the absence
+    accurately is the finding: a Canadian direct-to-consumer carrier with no
+    broker channel, no ACORD footprint, no developer portal and no
+    machine-readable surface, in a market with no open-insurance mandate.

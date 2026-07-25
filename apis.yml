@@ -1,0 +1,54 @@
+aid: sonnet-insurance
+url: https://raw.githubusercontent.com/api-evangelist/sonnet-insurance/refs/heads/main/apis.yml
+name: Sonnet Insurance
+kind: company
+description: Sonnet Insurance is a Canadian direct-to-consumer digital property and
+  casualty insurer launched in 2016 and a member of the Definity family of companies,
+  underwriting its own auto, home, condo, tenant, landlord and pet policies through
+  Sonnet Insurance Company. It sells auto, home, condo, tenant and landlord coverage
+  in Ontario, Quebec, New Brunswick, Nova Scotia and Prince Edward Island, and home-only
+  coverage in British Columbia and Alberta, positioning itself as "Canada's original
+  digital-first home and auto insurance company" with a fully online quote-and-buy
+  flow and licensed agents for support. Sonnet is an explicit direct writer -- its
+  own FAQ states that "a third party -- even a licensed broker -- cannot purchase
+  a Sonnet policy on your behalf" -- so it operates no broker or agency distribution
+  channel and therefore no ACORD/AL3 agency-download path. Its API posture is closed
+  -- no developer, developers, docs or api subdomain resolves in DNS, every first-party
+  developer path probed returns HTTP 404, and no OpenAPI, Swagger, GraphQL, Postman
+  collection, webhook catalog or partner technical onboarding surface is published.
+  The only third-party integrations Sonnet describes -- the Kanetix.ca (RATESDOTCA)
+  quote-and-buy partnership and the Sonnet Connect brand referral program -- are
+  privately negotiated commercial arrangements with no public technical documentation.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Insurance
+- Canada
+- Property and Casualty
+- Auto Insurance
+- Home Insurance
+- Insurtech
+- Direct to Consumer
+- Underwriting
+- Claims
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis: []
+common:
+- type: Website
+  url: https://www.sonnet.ca/
+- type: About
+  url: https://www.sonnet.ca/about-us
+- type: Blog
+  url: https://www.sonnet.ca/blog
+- type: Partnerships
+  url: https://www.sonnet.ca/partnerships
+- type: Login
+  url: https://www.sonnet.ca/account-log-in
+- type: LinkedIn
+  url: https://www.linkedin.com/company/sonnet-insurance
+- type: Twitter
+  url: https://x.com/sonnetinsurance
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
