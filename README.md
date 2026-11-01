@@ -1,4 +1,4 @@
-# Sonnet Insurance (sonnet-insurance)
+# Sonnet Insurance
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,65 +64,84 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Sonnet Insurance is a Canadian direct-to-consumer digital property and casualty insurer launched in 2016 and a member of the Definity family of companies, underwriting its own auto, home, condo, tenant, landlord and pet policies through Sonnet Insurance Company. It sells auto, home, condo, tenant and landlord coverage in Ontario, Quebec, New Brunswick, Nova Scotia and Prince Edward Island, and home-only coverage in British Columbia and Alberta.
+Sonnet Insurance is a Canadian direct-to-consumer digital property and casualty insurer launched in 2016 and a member of the Definity family of companies, underwriting its own auto, home, condo, tenant, landlord and pet policies through Sonnet Insurance Company. It sells auto, home, condo, tenant and landlord coverage in Ontario, Quebec, New Brunswick, Nova Scotia and Prince Edward Island, and home-only coverage in British Columbia and Alberta, positioning itself as "Canada's original digital-first home and auto insurance company" with a fully online quote-and-buy flow and licensed agents for support. Sonnet is an explicit direct writer -- its own FAQ states that "a third party -- even a licensed broker -- cannot purchase a Sonnet policy on your behalf" -- so it operates no broker or agency distribution channel and therefore no ACORD/AL3 agency-download path. Its API posture is closed -- no developer, developers, docs or api subdomain resolves in DNS, every first-party developer path probed returns HTTP 404, and no OpenAPI, Swagger, GraphQL, Postman collection, webhook catalog or partner technical onboarding surface is published. The only third-party integrations Sonnet describes -- the Kanetix.ca (RATESDOTCA) quote-and-buy partnership and the Sonnet Connect brand referral program -- are privately negotiated commercial arrangements with no public technical documentation. Two machine-readable surfaces do exist and are captured here. Sonnet serves a real llms.txt at www.sonnet.ca/llms.txt that declares per-agent AI-Training, AI-Generation, AI-Summarization and AI-Crawling directives (Allow for OpenAI, Google-DeepMind and Anthropic) alongside a curated reference-content index -- an AI consent signal rather than an API contract. And the secure.sonnet.ca quote-and-buy application is driven by an undocumented first-party REST/JSON surface under /api/v1 covering quoting, binding, policy servicing, payments and identity; it is observable from Sonnet's own public JavaScript bundle but carries no documentation, no specification and no third-party terms of use, so it is recorded as observed evidence, not as an integratable API.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/sonnet-insurance/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/sonnet-insurance/refs/heads/main/apis.yml)
+**Areas:** Insurance · Canada · Property and Casualty · Auto Insurance · Home Insurance · Insurtech · Direct to Consumer · Underwriting · Claims
 
-## Tags
+## Sonnet Insurance on APIs.io
 
-- Insurance
-- Canada
-- Property and Casualty
-- Auto Insurance
-- Home Insurance
-- Insurtech
-- Direct to Consumer
-- Underwriting
-- Claims
+Everything profiled for Sonnet Insurance is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sonnet-insurance/](https://apis.io/providers/sonnet-insurance/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-25
-- **Modified:** 2026-07-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Security (1)
 
-Sonnet Insurance publishes **no public API**. This entry is intentionally empty, and that absence is the finding.
+Authentication, trust centre, and vulnerability disclosure.
 
-Every candidate developer host — `developer.sonnet.ca`, `developers.sonnet.ca`, `docs.sonnet.ca`, `api.sonnet.ca` — fails to resolve in DNS. Every candidate first-party path — `/developers`, `/developer`, `/api`, `/partners`, `/integrations` — returns HTTP 404. `/openapi.json`, `/swagger.json`, `/api-docs`, `/graphql`, `/.well-known/openid-configuration` and `/.well-known/oauth-authorization-server` all return HTTP 404. The published sitemap contains no developer, docs or API path. No OpenAPI, Swagger, AsyncAPI, GraphQL SDL, Postman collection, webhook catalog, SDK or GitHub organization exists.
+- [Sonnet Insurance Domain Security](https://apis.io/security/sonnet-insurance/sonnet-insurance-domain-security/)
 
-### ACORD posture
+## Where to find this API
 
-**No ACORD reference found.** Searches for ACORD, AL3, ACORD XML, NGDS, IVANS, Applied Epic, Vertafore and AMS360 return nothing across Sonnet's site. This is structural rather than accidental: Sonnet is an explicit direct writer with no broker or agency channel — its own FAQ states that "a third party – even a licensed broker – cannot purchase a Sonnet policy on your behalf" — so the ACORD agency-download rails that carry integration for broker-distributed Canadian carriers have nothing to attach to here.
-
-### Quote / bind / issue / FNOL
-
-Sonnet genuinely does all four online, and is notable in the Canadian market for allowing full purchase (not just quoting) through the Kanetix.ca comparison platform. But all four run exclusively inside Sonnet's own first-party web application at `www.sonnet.ca`. None is exposed as a documented API to consumers, agents or partners.
-
-The only third-party integrations Sonnet describes are commercial, not technical: the Kanetix.ca (RATESDOTCA) quote-and-buy partnership and the Sonnet Connect brand referral program, neither of which publishes any integration detail.
-
-### Two machine-readable surfaces that do exist
-
-**An `llms.txt`, but no API.** `https://www.sonnet.ca/llms.txt` returns a real 5,836-byte document declaring per-agent AI directives — `AI-Training`, `AI-Generation`, `AI-Summarization` and `AI-Crawling` all set to `Allow`, with named entries for OpenAI, Google-DeepMind and Anthropic — plus a curated index of Sonnet's product, support, legal and social pages and a "Sitemap for AI Indexing (Not Training)" pointer. A carrier with no developer program has nonetheless published a deliberate agent-facing consent posture. The AI surface arrived before the API surface. Captured verbatim in `llms/`.
-
-**An undocumented internal API.** DNS enumeration surfaced `secure.sonnet.ca` — the only resolving non-`www` subdomain and the host of Sonnet's AngularJS quote-and-buy application. Its public application bundle contains **117 distinct `/api/v1/*` endpoint paths** spanning quoting (30), identity and verification (21), payments and billing (14), underwriting data (11), policy servicing (10), binding and issuance (7), address and availability (7), customer profile (7), group discounts (4), content and support (4), claims (1) and telemetry (1). `/api/v1/digital_quotes/create_auto`, `/api/v1/bind_policy` and `/api/v1/generate_document/` mean quote, bind and issue are each backed by real JSON endpoints. No FNOL endpoint was observed.
-
-This does not make Sonnet an API provider. There is no documentation, no specification, no developer terms and no credential a third party can obtain. Nothing was called and nothing was inferred: the inventory in `endpoints/` records observed paths only, `apis[]` stays empty, and no OpenAPI was fabricated.
-
-### Market context
-
-Canada has the most fragmented insurance supervision of the major markets — OSFI supervises federally-regulated insurers prudentially while the provinces regulate market conduct (FSRA in Ontario, AMF in Quebec). There is no open-insurance mandate, and Consumer-Driven Banking, Canada's open-banking framework, excludes insurance entirely. Nothing compels Sonnet to expose an API, and it does not.
-
-## Links
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.sonnet.ca/)
-- [About](https://www.sonnet.ca/about-us)
+- [Sign up](https://www.sonnet.ca/get-a-quote)
+- [Support](https://www.sonnet.ca/contact-us)
 - [Blog](https://www.sonnet.ca/blog)
-- [Partnerships](https://www.sonnet.ca/partnerships)
-- [Account Login](https://www.sonnet.ca/account-log-in)
-- [LinkedIn](https://www.linkedin.com/company/sonnet-insurance)
-- [X](https://x.com/sonnetinsurance)
+- [Terms of service](https://www.sonnet.ca/terms-of-use)
+- [Privacy policy](https://www.sonnet.ca/privacy)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 11.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 56.3 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 7.1 |
+| Access clarity | 27.6 |
+
+**Agent readiness 2.2** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | yes |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 12.3** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sonnet-insurance/](https://apis.io/providers/sonnet-insurance/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Sonnet Insurance: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sonnet-insurance/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
